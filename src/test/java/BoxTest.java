@@ -25,7 +25,8 @@ class BoxTest {
     @Test
     void testTwoValuesSum(){
         Box<String, Integer, Double> box2 = new Box<>("Key2", 30, 0.5d);
-        double result = box.twoValuesSum() + box2.twoValuesSum();
-        assertEquals(91, result);
+        double result = box.getValue() + box.getSecondValue() +  box2.getValue() + box2.getSecondValue();
+        // Ќе забывай про погрешность в Java при работе с Double
+        assertEquals(91, result, 0.00005);
     }
 }

@@ -22,10 +22,11 @@ public class Box<K, V, D> {
         this.value = value;
     }
 
-    public double twoValuesSum(){
-        if (value instanceof Integer && secondValue instanceof Double){
-            return (int) value + (double) secondValue;
-        }
-        throw new RuntimeException();
+    public void setSecondValue(D secondValue){
+        this.secondValue = secondValue;
+    }
+
+    public D getSecondValue(){
+        return secondValue;
     }
 }
