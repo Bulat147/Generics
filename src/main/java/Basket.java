@@ -30,9 +30,7 @@ public class Basket<T extends Fruit> {
     }
 
     public static <U extends Fruit> void transfer(Basket<U> src, Basket<? super U> dsr){ // €блоки - фрукты, но не €блоки - апельсины
-        for (U fruit : src.fruits){
-            dsr.add(fruit);
-        }
+        dsr.fruits.addAll(src.fruits);
         src.fruits.clear();
         src.setWeight(0);
     }
