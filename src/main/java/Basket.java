@@ -2,17 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket<T extends Fruit> {
-    private final List<T> array = new ArrayList<>();
+    public final List<T> fruits = new ArrayList<>();
     private double weight = 0;
 
     public <U extends T> void add(U fruit){
-        array.add(fruit);
-        weight += fruit.weight();
+        fruits.add(fruit);
+        weight += fruit.getWeight();
     }
 
-    public List<T> getFruits(){
-        return array;
-    }
 
     public double getWeight(){
         return weight;
@@ -33,36 +30,30 @@ public class Basket<T extends Fruit> {
     }
 
     public static <U extends Fruit> void transfer(Basket<U> src, Basket<? super U> dsr){ // €блоки - фрукты, но не €блоки - апельсины
-        for (U fruit : src.getFruits()){
+        for (U fruit : src.fruits){
             dsr.add(fruit);
         }
-        src.getFruits().clear();
+        src.fruits.clear();
         src.setWeight(0);
     }
 }
 
-class Fruit {
-    private final double weight;
-
-    public Fruit(double weight){
-        this.weight = weight;
-    }
-
-    public double weight() {
-        return weight;
-    }
+abstract class Fruit { // ≈сли есть конкретика - €блоко, то фрукт - это уже абстракци€
+    public abstract double getWeight();
 }
 
 class Apple extends Fruit{
 
-    public Apple() {
-        super(1); // ¬ызываем конструктор Fruit
+    @Override
+    public double getWeight() {
+        return 1;
     }
 }
 
 class Orange extends Fruit{
 
-    public Orange() {
-        super(1.5);
+    @Override
+    public double getWeight() {
+        return 1.5;
     }
 }

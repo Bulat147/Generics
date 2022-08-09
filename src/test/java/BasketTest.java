@@ -39,11 +39,9 @@ class BasketTest {
         Basket<Fruit> basket = new Basket<>();
         Apple apple = new Apple();
         Orange orange = new Orange();
-        Fruit someFruit = new Fruit(2);
         basket.add(apple);
         basket.add(orange);
-        basket.add(someFruit);
-        assertEquals(4.5, basket.getWeight());
+        assertEquals(2.5, basket.getWeight());
     }
 
     @Test
@@ -56,7 +54,14 @@ class BasketTest {
         basket2.add(new Orange());
         assertEquals(1, basket1.compare(basket2), 0.0005);
         assertEquals(-1, basket2.compare(basket1), 0.0005);
-        basket2.add(new Fruit(8.5));
+        class Pineapple extends Fruit{
+
+            @Override
+            public double getWeight() {
+                return 8.5;
+            }
+        }
+        basket2.add(new Pineapple());
         assertEquals(0, basket1.compare(basket2), 0.0005);
     }
 
@@ -69,7 +74,7 @@ class BasketTest {
         }
         Basket.transfer(basket1, basket2);
         assertEquals(0, basket1.getWeight());
-        assertEquals(0, basket1.getFruits().size());
+        assertEquals(0, basket1.fruits.size());
     }
 }
 
@@ -78,8 +83,8 @@ class AppleOrangeTest {
     @Test
     void weight(){
         Apple apple = new Apple();
-        assertEquals(1, apple.weight());
+        assertEquals(1, apple.getWeight());
         Orange orange = new Orange();
-        assertEquals(1.5, orange.weight());
+        assertEquals(1.5, orange.getWeight());
     }
 }
