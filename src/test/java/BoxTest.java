@@ -1,32 +1,40 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoxTest {
-    Box<String, Integer, Double> box;
-
-    @BeforeEach
-    void setUp() {
-        box = new Box<>("Ключ1", 15, 45.5d);
+    @Test
+    public void avg(){
+        Box<Integer> box1 = new Box<>(4, 5, 6, 7);
+        assertEquals(22, box1.avg());
     }
 
     @Test
-    void getValue() {
-        assertEquals(15, box.getValue());
+    public void compareTo(){
+        Box<Float> box1 = new Box<>(4.5f, 5.5f, 5f);
+        Box<Integer> box2 = new Box<>(15, 5);
+        int check = box1.compareTo(box2);
+        assertEquals(-9, check);
     }
 
     @Test
-    void setValue() {
-        box.setValue(455);
-        assertEquals(455, box.getValue());
+    public void listAvg(){
+        List<Integer> newList = new ArrayList<>();
+        double result = Box.listAvg(newList);
+        assertEquals(0, result);
     }
 
     @Test
-    void testTwoValuesSum(){
-        Box<String, Integer, Double> box2 = new Box<>("Key2", 30, 0.5d);
-        double result = box.getValue() + box.getSecondValue() +  box2.getValue() + box2.getSecondValue();
-        // Не забывай про погрешность в Java при работе с Double
-        assertEquals(91, result, 0.00005);
+    public void transfer(){
+        List<Integer> nums = new ArrayList<>();
+        for (int i=0; i<10; i++){
+            nums.add(i);
+        }
+        List<Number> nums2 = new ArrayList<>();
+        Box.transfer(nums, nums2); // Мы можем добавлять Integer-объекты в Number-коллекцию
     }
 }
